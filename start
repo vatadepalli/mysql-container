@@ -3,7 +3,7 @@ my_dir=`dirname $0`
 cd $my_dir
 
 docker-compose start
-docker-compose exec mysql /bin/bash
+docker-compose exec db /bin/bash
 docker-compose stop
 
 
