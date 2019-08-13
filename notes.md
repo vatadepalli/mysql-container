@@ -58,6 +58,42 @@
                 DELETE FROM users WHERE id = 3;
 
                 UPDATE users SET email = 'vijay@gmail.com' WHERE id = 2;
+
+                ALTER TABLE users ADD age VARCHAR(3);
+                ALTER TABLE users MODIFY COLUMN age INT(3);
+
+                SELECT * FROM users ORDER BY last_name DESC;
+
+* Concat
+
+                SELECT CONCAT(first_name, ' ', last_name) AS 'name', dept FROM users;
+
+* Distinct
+
+                SELECT DISTINCT location FROM users;
+
+* Range
+
+                SELECT * FROM users WHERE age BETWEEN 20 AND 25;
+
+* Like / Not Link
+
+                SELECT * FROM users WHERE dept LIKE 'd%'
+                # starts with 'd'
+
+                SELECT * FROM users WHERE dept LIKE '%t'
+                # ends with a 't'
+
+                SELECT * FROM users WHERE dept LIKE '%op%'
+                # contains a 'op'
+
+                SELECT * FROM users WHERE dept NOT LIKE '%op%'
+                # does not contain a 'op'
+
+* In
+
+                SELECT * FROM users WHERE dept IN('design', 'sales')
+                # all uses in depts of design & sales
     
 * Dropping
 
