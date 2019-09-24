@@ -1,0 +1,4 @@
+select upper("banna");
+
+
+
