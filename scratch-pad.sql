@@ -1,4 +1,5 @@
-select upper("banna");
+use test;
+select * from EMP;
 
 
-
+select ename from EMP;

@@ -1,3 +1,4 @@
+// ln -s node_modules.nosync/ node_modules
 const express = require("express");
 const mysql = require("mysql");
 
@@ -10,8 +11,14 @@ const db = mysql.createConnection({
   database: "acme"
 });
 
-db.connect();
+db.connect(err => {
+  if (err) {
+    console.log("Could not connect to MySQL Server.");
+  }
+  console.log("MySQL Connected.");
+});
 
+/*
 app.get("/users", (req, res) => {
   const sql = "SELECT * FROM users";
 
@@ -19,24 +26,24 @@ app.get("/users", (req, res) => {
     if (err) {
       throw err;
     }
-
+    console.log("Received GET request on /users");
     res.send(result);
   });
 });
+*/
 
-app.get("/users1", (req, res) => {
-  const sql = `
-                SELECT first_name, last_name, email 
-                FROM users 
-                ORDER by last_name
-                `;
+app.get("/:table", (req, res) => {
+  console.log(`Received GET request on / for param "${req.params.table}"`);
 
+  let sql = `SELECT * FROM ${req.params.table}`;
   db.query(sql, (err, result) => {
     if (err) {
-      throw err;
+      res.send(err);
+      console.log("Error (From Database) (Sent to user): ", err.message);
+    } else {
+      res.send(result);
+      console.log("Success: Data Sent to User.");
     }
-
-    res.send(result);
   });
 });
 
